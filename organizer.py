@@ -10,8 +10,10 @@ def organize_files(source_folder):
         "Videos": ["mp4", "avi", "mkv", "mov", "wmv"],
         "Audio": ["mp3", "wav", "ogg"],
         "Programming": ["py", "java", "cpp", "c", "html", "css", "js"],
-        "Applications": ["exe","app","msi"],
+        "Applications": ["exe", "app", "msi"],
     }
+    
+    other_category = "Others"
 
     for file in files:
         if os.path.isfile(os.path.join(source_folder, file)):
@@ -24,6 +26,12 @@ def organize_files(source_folder):
                     destination_path = os.path.join(folder_path, file)
                     shutil.move(source_path, destination_path)
                     break
+            else:
+                folder_path = os.path.join(source_folder, other_category)
+                os.makedirs(folder_path, exist_ok=True)
+                source_path = os.path.join(source_folder, file)
+                destination_path = os.path.join(folder_path, file)
+                shutil.move(source_path, destination_path)
 
 def main():
     print("Welcome to File Organizer!")
@@ -37,4 +45,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
